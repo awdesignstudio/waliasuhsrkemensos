@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan & Edukasi Mandiri PPPK Wali Asuh UPT Sekolah Rakyat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 260px;
+            max-height: 400px;
+        }
+        @media (min-width: 640px) {
+            .chart-container {
+                height: 320px;
+            }
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .tab-btn.active {
+            background-color: #059669; /* Emerald color for Wali Asuh distinction */
+            color: #ffffff;
+            border-color: #059669;
+            box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.3);
+        }
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans leading-relaxed selection:bg-emerald-500 selection:text-white">
+
+    <div class="bg-amber-500 text-slate-950 font-bold text-[11px] sm:text-xs py-1.5 px-4 text-center border-b border-amber-600 shadow-sm flex items-center justify-center gap-2">
+        <span>⚠️</span>
+        <span><strong>PORTAL EDUKASI MANDIRI (NON-RESMI):</strong> Disusun independen mengacu pada Juknis Kemensos 2025, UU 20/2023, Perpres 11/2024, Permensos 1/2025. Bukan situs resmi Kementerian Sosial RI.</span>
+    </div>
+
+    <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-xl border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3 w-full md:w-auto justify-between md:justify-start">
+                <div class="flex items-center space-x-2.5">
+                    <div class="bg-emerald-500 text-slate-950 font-black p-2 sm:p-2.5 rounded-xl text-xl sm:text-2xl shadow-inner">
+                        🌱
+                    </div>
+                    <div>
+                        <h1 class="text-base sm:text-lg md:text-xl font-black tracking-tight text-white leading-tight">PANDUAN MANDIRI PPPK WALI ASUH</h1>
+                        <p class="text-[10px] sm:text-xs text-emerald-400 font-medium">UPT Sekolah Rakyat • Hak, Finansial, Struktur & Operasional</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-72">
+                <div class="relative">
+                    <input type="text" id="global-search" oninput="handleSearch()" placeholder="Cari kemitraan, gaji, permensos 1/2025..." class="w-full bg-slate-800 text-white text-xs rounded-xl pl-8 pr-3 py-2 border border-slate-700 focus:outline-none focus:border-emerald-500 placeholder-slate-400">
+                    <span class="absolute left-2.5 top-2 text-xs text-slate-400">🔍</span>
+                </div>
+            </div>
+        </div>
+
+        <nav class="bg-slate-950/90 border-t border-slate-800 px-2 sm:px-6 lg:px-8 py-2 overflow-x-auto no-scrollbar">
+            <div class="max-w-7xl mx-auto flex space-x-1.5 sm:space-x-2 text-[11px] sm:text-xs font-semibold whitespace-nowrap">
+                <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-btn active px-3 py-2 rounded-lg border border-slate-800 text-slate-300 hover:text-white transition">📊 Dashboard</button>
+                <button onclick="switchTab('struktur-org')" id="tab-struktur-org" class="tab-btn px-3 py-2 rounded-lg border border-slate-800 text-slate-300 hover:text-white transition">🌳 Kemitraan & Struktur</button>
+                <button onclick="switchTab('tugas-kewajiban')" id="tab-tugas-kewajiban" class="tab-btn px-3 py-2 rounded-lg border border-slate-800 text-slate-300 hover:text-white transition">📋 Kewajiban Wali Asuh</button>
+                <button onclick="switchTab('kelas-jabatan')" id="tab-kelas-jabatan" class="tab-btn px-3 py-2 rounded-lg border border-slate-800 text-slate-300 hover:text-white transition">🏛️ Kelas Jabatan</button>
+                <button onclick="switchTab('pegawai-baru')" id="tab-pegawai-baru" class="tab-btn px-3 py-2 rounded-lg border border-slate-800 text-slate-300 hover:text-white transition">🌱 Masa Kerja &lt; 1 Thn</button>
+                <button onclick="switchTab('kalkulator')" id="tab-kalkulator" class="tab-btn px-3 py-2 rounded-lg border border-slate-800 text-slate-300 hover:text-white transition">🧮 Simulasi Gaji & THP</button>
+                <button onclick="switchTab('matriks-cuti')" id="tab-matriks-cuti" class="tab-btn px-3 py-2 rounded-lg border border-slate-800 text-slate-300 hover:text-white transition">📅 Hak Cuti & Syarat</button>
+                <button onclick="switchTab('operasional')" id="tab-operasional" class="tab-btn px-3 py-2 rounded-lg border border-slate-800 text-slate-300 hover:text-white transition">🏢 Operasional & Shift</button>
+                <button onclick="switchTab('disiplin')" id="tab-disiplin" class="tab-btn px-3 py-2 rounded-lg border border-slate-800 text-slate-300 hover:text-white transition">⚠️ Sanksi & Potongan</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-6">
+
+        <div id="search-results-box" class="hidden bg-amber-50 border border-amber-300 rounded-xl p-4 text-xs space-y-2">
+            <h3 class="font-bold text-amber-900 flex items-center justify-between">
+                <span>🔍 Hasil Pencarian Topik Kata Kunci</span>
+                <button onclick="clearSearch()" class="text-rose-600 font-bold hover:underline">Tutup [X]</button>
+            </h3>
+            <div id="search-results-list" class="space-y-1 text-slate-800"></div>
+        </div>
+
+        <div id="page-dashboard" class="page-section active space-y-6">
+            <section class="bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900 text-white p-5 sm:p-7 rounded-2xl shadow-md border border-slate-800">
+                <div class="max-w-3xl space-y-2.5">
+                    <span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 font-bold text-[10px] sm:text-xs rounded-full border border-emerald-400/30">Ringkasan Sistemik Kepegawaian, Jabatan & Operasional PPPK</span>
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-black leading-tight">Landasan Hukum, Hak Finansial, dan Kemitraan Wali Asuh</h2>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Sistem ini menyajikan referensi komprehensif mengenai **Struktur Organisasi & Kemitraan Sejajar dengan Wali Asrama**, rincian SOP kepengasuhan anak didik, **Kelas Jabatan (Permensos No. 1 Tahun 2025)**, simulasi Tukin, skema cuti (Perba BKN 7/2022), serta standar operasional UPT Sekolah Rakyat.
+                    </p>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                <div class="bg-white rounded-xl p-3.5 sm:p-4 shadow-sm border-l-4 border-amber-500 border-y border-r border-slate-200">
+                    <p class="text-[10px] sm:text-[11px] uppercase font-bold text-slate-500">Pelaporan & Koordinasi</p>
+                    <h3 class="text-base sm:text-lg font-black text-slate-900 mt-1">Wali Asrama</h3>
+                    <p class="text-[11px] text-amber-700 font-semibold mt-0.5">Penerima Laporan Anak Asuh</p>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 mt-2 border-t pt-1">Juknis Sekolah Rakyat 2025</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-3.5 sm:p-4 shadow-sm border-l-4 border-emerald-600 border-y border-r border-slate-200">
+                    <p class="text-[10px] sm:text-[11px] uppercase font-bold text-slate-500">Gaji Pokok Awal Gol IX</p>
+                    <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-1">Rp 3.203.600</h3>
+                    <p class="text-[11px] text-emerald-700 font-semibold mt-0.5">100% Dibayar Sejak SPMT</p>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 mt-2 border-t pt-1">Perpres No. 11 Tahun 2024</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-3.5 sm:p-4 shadow-sm border-l-4 border-indigo-600 border-y border-r border-slate-200">
+                    <p class="text-[10px] sm:text-[11px] uppercase font-bold text-slate-500">Kelas Jabatan Pelaksana</p>
+                    <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-1">Kelas Jabatan 7</h3>
+                    <p class="text-[11px] text-indigo-700 font-semibold mt-0.5">Penata Layanan Operasional</p>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 mt-2 border-t pt-1">Permensos No. 1 Tahun 2025</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-3.5 sm:p-4 shadow-sm border-l-4 border-teal-600 border-y border-r border-slate-200">
+                    <p class="text-[10px] sm:text-[11px] uppercase font-bold text-slate-500">Estimasi THP Awal (K/2)</p>
+                    <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-1">~ Rp 8,60 Juta</h3>
+                    <p class="text-[11px] text-teal-700 font-semibold mt-0.5">Gaji + Tukin Class 7 + Pangan</p>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 mt-2 border-t pt-1">Perpres Tukin & Permensos 1/2025</p>
+                </div>
+            </section>
+
+            <!-- KEMITRAAN HIGHLIGHT -->
+            <section class="bg-teal-50 rounded-2xl p-4 sm:p-5 border-l-4 border-teal-500 border-y border-r shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="space-y-1 text-xs">
+                    <span class="px-2 py-0.5 bg-teal-200 text-teal-900 font-bold rounded text-[10px]">📌 PRINSIP KERJA UPT SEKOLAH RAKYAT</span>
+                    <h3 class="text-sm sm:text-base font-bold text-teal-950">Kemitraan Sejajar: Wali Asrama & Wali Asuh</h3>
+                    <p class="text-slate-700 leading-relaxed">
+                        Sesuai Juknis Asrama Sekolah Rakyat, <strong>Wali Asrama dan Wali Asuh bermitra dalam kepengasuhan</strong>. Seluruh operasional berada di bawah koordinasi struktural <strong>Kepala Sekolah</strong>, di mana Wali Asuh bertindak secara mikro sebagai pengasuh, pendidik, dan pelindung anak didik, serta melaporkan perkembangannya kepada Wali Asrama.
+                    </p>
+                </div>
+                <button onclick="switchTab('struktur-org')" class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-xl shadow transition whitespace-nowrap">
+                    Lihat Peta Koordinasi →
+                </button>
+            </section>
+
+            <section class="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-slate-200 space-y-4">
+                <div class="border-b border-slate-200 pb-3">
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <span>⚖️</span> Landasan Hukum & Regulasi Acuan Utama (4 Sumber Regulasi Kemensos)
+                    </h3>
+                    <p class="text-xs text-slate-600 mt-1">
+                        Seluruh kebijakan kedudukan mitra, kewajiban pengasuhan, hak finansial PPPK, penetapan kelas jabatan, dan disiplin bertumpu pada peraturan berikut:
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs">
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-1">
+                        <span class="px-2 py-0.5 bg-sky-100 text-sky-800 font-bold rounded text-[10px]">Landasan Kepegawaian & Gaji</span>
+                        <h4 class="font-bold text-slate-900">UU 20/2023 & Perpres 11/2024</h4>
+                        <p class="text-slate-600">UU ASN menetapkan 8 kewajiban utama ASN dan core values BerAKHLAK, serta Perpres 11/2024 mengatur gaji pokok PPPK Gol I s.d. XVII.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-1">
+                        <span class="px-2 py-0.5 bg-indigo-100 text-indigo-800 font-bold rounded text-[10px]">Pembaruan Kelas Jabatan</span>
+                        <h4 class="font-bold text-slate-900">Permensos No. 1 Tahun 2025</h4>
+                        <p class="text-slate-600">Menyatakan kesetaraan pangkat pelaksana, di mana Wali Asrama dan Wali Asuh menempati posisi Penata Layanan Operasional Kelas 7.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-1">
+                        <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[10px]">UPT SR & SOP Asrama</span>
+                        <h4 class="font-bold text-slate-900">Juknis Sekolah Rakyat 2025</h4>
+                        <p class="text-slate-600">Menegaskan rincian 15 butir SOP Wali Asuh, pengaturan jadwal harian (SD/SMP/SMA), serta pedoman mitigasi dan konseling asrama.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-1">
+                        <span class="px-2 py-0.5 bg-amber-100 text-amber-800 font-bold rounded text-[10px]">Tunjangan, Cuti & Disiplin</span>
+                        <h4 class="font-bold text-slate-900">Permensos 5&6/2023, Perba BKN 7/2022</h4>
+                        <p class="text-slate-600">Aturan pencairan Tunjangan Kinerja (Tukin) e-Kinerja, skema pemotongan harian absensi, dan petunjuk teknis pemberian cuti PPPK.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-struktur-org" class="page-section space-y-6">
+            <section class="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-slate-200 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <span>🌳</span> Struktur Organisasi & Kemitraan UPT Sekolah Rakyat
+                    </h2>
+                    <p class="text-xs text-slate-600 mt-1">
+                        Berdasarkan Petunjuk Teknis Asrama SR 2025, Wali Asuh dan Wali Asrama berdiri sejajar di bawah Kasubag TU. Keduanya saling bersinergi, bukan merupakan atasan-bawahan.
+                    </p>
+                </div>
+
+                <div class="bg-slate-900 text-white p-4 sm:p-6 rounded-2xl space-y-6 shadow-lg">
+                    <div class="text-center space-y-1">
+                        <span class="px-3 py-1 bg-amber-500/20 text-amber-300 font-bold text-xs rounded-full border border-amber-500/30 uppercase tracking-widest">DIAGRAM HIRARKI KOORDINASI ASRAMA SR</span>
+                    </div>
+
+                    <div class="flex flex-col items-center space-y-5 text-xs">
+                        
+                       <div class="w-full max-w-md bg-gradient-to-r from-purple-900 to-slate-800 pt-6 pb-4 px-4 rounded-2xl border-2 border-purple-500/50 text-center shadow-md relative">
+                            <span class="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-purple-600 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider whitespace-nowrap shadow">Pimpinan Puncak & Penanggung Jawab</span>
+                            <div class="font-black text-sm sm:text-base text-purple-200 mt-1">KEPALA SEKOLAH RAKYAT</div>
+                            <div class="text-[11px] text-slate-300 font-medium mt-0.5">Mengoordinasikan Pengelolaan Pembelajaran dan Operasional Asrama</div>
+                        </div>
+
+                        <div class="text-slate-400 font-black text-xl">↓</div>
+
+                        <!-- MITRA SEJAJAR WALI ASRAMA & WALI ASUH -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-3xl">
+                            <!-- Kolom Wali Asrama -->
+                            <div class="bg-gradient-to-br from-sky-900 to-slate-800 p-4 rounded-xl border border-sky-500 text-center relative shadow-md">
+                                <div class="font-black text-sm sm:text-base text-sky-200">WALI ASRAMA</div>
+                                <div class="text-[10px] text-sky-100 font-medium mt-1 mb-2">(Penata Layanan Operasional - Kelas 7)</div>
+                                <div class="text-left text-[10px] bg-slate-900/50 p-2 rounded border border-slate-700 space-y-1">
+                                    <p class="text-sky-300 font-bold border-b border-slate-700 pb-1">Fokus Koordinasi:</p>
+                                    <ul class="list-disc list-inside text-slate-300">
+                                        <li>Mengelola ketertiban asrama makro.</li>
+                                        <li>Memastikan keamanan sarpras.</li>
+                                        <li>Menyusun program asrama.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Kolom Wali Asuh -->
+                            <div class="bg-gradient-to-br from-emerald-900 to-slate-800 p-4 rounded-xl border-2 border-emerald-400 text-center relative shadow-lg ring-2 ring-emerald-500/20">
+                                <span class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-emerald-500 text-white px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider shadow whitespace-nowrap">📍 POSISI ANDA</span>
+                                <div class="font-black text-sm sm:text-base text-emerald-300 mt-1">WALI ASUH</div>
+                                <div class="text-[10px] text-emerald-100 font-medium mt-1 mb-2">(Penata Layanan Operasional - Kelas 7)</div>
+                                <div class="text-left text-[10px] bg-slate-900/50 p-2 rounded border border-slate-700 space-y-1">
+                                    <p class="text-emerald-300 font-bold border-b border-slate-700 pb-1">Fokus Pengasuhan Mikro:</p>
+                                    <ul class="list-disc list-inside text-slate-300">
+                                        <li>Pendamping & Pelindung peserta didik.</li>
+                                        <li>Pembinaan mental & akademik.</li>
+                                        <li>Konseling & refleksi keseharian.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center text-[10px] text-emerald-400 font-bold mt-2">↔️ Kemitraan Sejajar / Koordinasi Lintas Fungsi ↔️</div>
+
+                        <div class="text-slate-400 font-black text-xl">↓</div>
+
+                        <div class="bg-slate-800 p-3.5 w-full max-w-sm rounded-xl border border-indigo-500/50 space-y-1 text-center">
+                            <span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-300 font-bold text-[9px] rounded">Sasar Objek Pelayanan Terpadu</span>
+                            <div class="font-bold text-white text-xs mt-1">PESERTA DIDIK BINAAN UPT SR</div>
+                            <p class="text-[10px] text-slate-300">Anak-anak Sekolah Rakyat yang menerima pembinaan karakter, pendidikan, dan kasih sayang harian.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-xs">
+                    <div class="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+                        <span>🤝</span> Prinsip Kerja Wali Asuh dengan Wali Asrama
+                    </div>
+                  <ul class="space-y-1.5 text-slate-600 list-disc list-inside">
+                        <li><strong>Kolaboratif:</strong> Wali Asuh wajib <em>membantu</em> Wali Asrama dalam menyusun dan memastikan keterlaksanaan program asrama, serta bersinergi demi kemajuan asrama.</li>
+                        <li><strong>Pelaporan & Kinerja:</strong> Wali Asuh wajib membuat laporan perkembangan peserta didik asuh (akademik & non-akademik) dan menyampaikannya kepada Wali Asrama. Sementara kinerja Wali Asuh dipantau dan dipastikan oleh Wali Asrama.</li>
+                        <li><strong>Tugas Terintegrasi:</strong> Wali Asrama memimpin koordinasi asrama makro di bawah Kepala Sekolah, sedangkan Wali Asuh berfokus pada pendampingan psikologis, pengasuhan karakter, dan konseling di lapangan.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-tugas-kewajiban" class="page-section space-y-6">
+            <section class="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-slate-200 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <span>📋</span> Standar Operasional Prosedur (SOP) & Kewajiban Wali Asuh
+                    </h2>
+                    <p class="text-xs text-slate-600 mt-1">
+                        Sesuai dengan <strong>Lampiran 2 Petunjuk Teknis Asrama Sekolah Rakyat</strong>, berikut adalah 15 butir SOP yang menjadi tanggung jawab kinerja seorang Wali Asuh.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <div class="lg:col-span-7 space-y-3">
+                        <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wide">15 Butir SOP Kinerja Wali Asuh</h3>
+                        
+                        <div class="space-y-2 text-[11px]">
+                            <div class="p-3 bg-slate-50 rounded-xl border border-emerald-200 space-y-1">
+                                <div class="font-bold text-emerald-900 flex justify-between">
+                                    <span>Tugas Kehadiran & Sinergi</span>
+                                    <span class="text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded text-[9px]">Manajerial Asrama</span>
+                                </div>
+                                <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                                    <li>Wajib berdomisili di asrama sebelum kehadiran peserta didik.</li>
+                                    <li>Menyambut kedatangan peserta didik, wali, dan tamu dengan ramah.</li>
+                                    <li>Membantu Wali Asrama menyusun program akademik & non-akademik.</li>
+                                    <li>Membantu Wali Asrama memastikan keterlaksanaan program.</li>
+                                    <li>Membantu Wali Asrama melakukan komunikasi intensif dengan <em>stakeholders</em> dan membangun sinergi.</li>
+                                </ul>
+                            </div>
+
+                            <div class="p-3 bg-slate-50 rounded-xl border border-sky-200 space-y-1">
+                                <div class="font-bold text-sky-900 flex justify-between">
+                                    <span>Pendampingan & Perlindungan Anak</span>
+                                    <span class="text-sky-700 bg-sky-100 px-2 py-0.5 rounded text-[9px]">Fokus Utama (Inti)</span>
+                                </div>
+                                <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                                    <li>Melakukan pendampingan, pembimbingan, dan pembinaan peserta didik dengan ramah.</li>
+                                    <li>Memastikan anak asuh mengikuti kegiatan yang diprogramkan harian hingga tahunan.</li>
+                                    <li>Memastikan kesehatan, ketertiban, keamanan, dan kenyamanan anak asuh.</li>
+                                    <li><strong>Tindakan preventif dan kuratif terhadap perundungan (bullying), pelecehan seksual, dan intoleransi.</strong></li>
+                                    <li>Memandu penyelesaian segala permasalahan yang berkaitan dengan peserta didik asuh.</li>
+                                </ul>
+                            </div>
+
+                            <div class="p-3 bg-slate-50 rounded-xl border border-amber-200 space-y-1">
+                                <div class="font-bold text-amber-900 flex justify-between">
+                                    <span>Evaluasi & Laporan Administratif</span>
+                                    <span class="text-amber-700 bg-amber-100 px-2 py-0.5 rounded text-[9px]">Pertanggungjawaban</span>
+                                </div>
+                                <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                                    <li>Melakukan refleksi harian, mingguan, bulanan, dan tahunan.</li>
+                                    <li>Menerima masukan dan kritik yang baik dengan senang hati.</li>
+                                    <li>Melakukan evaluasi berkala terhadap kepengasuhan.</li>
+                                    <li>Membuat laporan perkembangan anak asuh (akademik & non-akademik) kepada Wali Asrama.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-center">
+                        <h3 class="text-xs font-bold text-slate-800 mb-2 text-center">Fokus Energi Harian Wali Asuh</h3>
+                        <div class="chart-container">
+                            <canvas id="taskAllocationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 text-white p-4 sm:p-5 rounded-2xl space-y-3 text-xs">
+                    <h3 class="font-bold text-emerald-300 text-sm flex items-center justify-between border-b border-slate-800 pb-2">
+                        <span>⏰ Gambaran Jadwal Kegiatan Pembinaan (Berdasarkan Juknis)</span>
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-slate-300">
+                        <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 space-y-1">
+                            <span class="font-bold text-emerald-400 block">Pagi Hari (03.30 - 07.00)</span>
+                            <span class="text-white font-semibold">Kebangkitan & Persiapan</span>
+                            <p class="text-[11px] text-slate-400">Membangunkan anak, memimpin kajian/pendalaman kitab, mengawasi olahraga, bersih diri, dan menyiapkan apel pagi sebelum sekolah.</p>
+                        </div>
+                        <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 space-y-1">
+                            <span class="font-bold text-teal-400 block">Siang Hari (13.00 - 15.30)</span>
+                            <span class="text-white font-semibold">Istirahat & Ibadah</span>
+                            <p class="text-[11px] text-slate-400">Memastikan anak-anak yang pulang sekolah dapat beristirahat siang dengan baik dan mempersiapkan ibadah sore secara tertib.</p>
+                        </div>
+                        <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 space-y-1">
+                            <span class="font-bold text-amber-400 block">Sore Hari (15.30 - 18.00)</span>
+                            <span class="text-white font-semibold">Ekstrakurikuler & Makan</span>
+                            <p class="text-[11px] text-slate-400">Mengawasi aktivitas relaksasi/pramuka, memastikan anak-anak mandi (bersih diri), dan mengawasi jalannya makan malam.</p>
+                        </div>
+                        <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 space-y-1">
+                            <span class="font-bold text-rose-400 block">Malam (19.30 - 21.00)</span>
+                            <span class="text-white font-semibold">Belajar & Refleksi Konseling</span>
+                            <p class="text-[11px] text-slate-400">Mendampingi belajar mandiri, memimpin refleksi instropeksi harian, melayani curhat/konseling anak, dan memastikan jam tidur ditaati.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-kelas-jabatan" class="page-section space-y-6">
+            <section class="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-slate-200 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <span>🏛️</span> Jabatan & Kelas Jabatan Pegawai Kemensos (Permensos No. 1 Tahun 2025)
+                    </h2>
+                    <p class="text-xs text-slate-600 mt-1">
+                        Hak dan kedudukan kelas jabatan Wali Asuh <strong>identik</strong> dengan Wali Asrama (Penata Layanan Operasional Kelas 7).
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <div class="lg:col-span-7 space-y-4 text-xs">
+                        <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-200 space-y-2">
+                            <h3 class="font-bold text-indigo-900 text-sm flex items-center gap-2">
+                                <span>📜</span> Poin-Poin Penting Permensos No. 1 Tahun 2025
+                            </h3>
+                            <ul class="space-y-1.5 text-slate-700 list-disc list-inside">
+                                <li><strong>Pasal 7 (Masa Transisi Kualifikasi 5 Tahun):</strong> Pejabat pelaksana yang belum memenuhi kualifikasi/syarat jabatan diberikan kelas jabatan lama dan <strong>wajib memenuhi kualifikasi maksimal 5 (lima) tahun</strong>. Jika tidak terpenuhi, akan diberhentikan dari jabatannya dan disesuaikan.</li>
+                                <li><strong>Klasifikasi Tukin:</strong> Kelas jabatan menjadi penentu utama besaran Tunjangan Kinerja (Tukin) yang diterima setiap pegawai Kemensos. Bagi kelas 7, Tukin bernilai Rp 3.915.950.</li>
+                            </ul>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-xl border border-slate-200">
+                            <table class="w-full text-left text-xs border-collapse min-w-[500px]">
+                                <thead>
+                                    <tr class="bg-slate-900 text-white font-bold">
+                                        <th class="p-2.5 border-b border-slate-700">Kelompok Jabatan / Nama Jabatan</th>
+                                        <th class="p-2.5 border-b border-slate-700 text-center">Kelas Jabatan</th>
+                                        <th class="p-2.5 border-b border-slate-700">Keterangan Instansional</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 text-slate-700">
+                                    <tr class="bg-emerald-50/50 border-l-4 border-emerald-500">
+                                        <td class="p-2.5 font-bold">Penata Layanan Ops. (WALI ASUH / WALI ASRAMA)</td>
+                                        <td class="p-2.5 text-center font-bold text-emerald-700">Kelas 7</td>
+                                        <td class="p-2.5">Jabatan Pelaksana UPT SR</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2.5 font-bold">Pekerja Sosial Ahli Pertama / Penyuluh Sosial Ahli Pertama</td>
+                                        <td class="p-2.5 text-center font-bold text-sky-700">Kelas 8</td>
+                                        <td class="p-2.5">Jabatan Fungsional Keahlian Pertama</td>
+                                    </tr>
+                                  <tr class="bg-slate-50">
+                                        <td class="p-2.5 font-bold">Pekerja Sosial Muda / Guru Ahli Muda</td>
+                                        <td class="p-2.5 text-center font-bold text-teal-700">Kelas 10</td>
+                                        <td class="p-2.5">Jabatan Fungsional Keahlian Muda</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2.5 font-bold">Kepala Sekolah Rakyat</td>
+                                        <td class="p-2.5 text-center font-bold text-purple-700">Guru Tugas Tambahan</td>
+                                        <td class="p-2.5">Pimpinan Sekolah & Penanggung Jawab Asrama</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-center">
+                        <h3 class="text-xs font-bold text-slate-800 mb-2 text-center">Distribusi Kelas Jabatan Fungsional & Pelaksana</h3>
+                        <div class="chart-container">
+                            <canvas id="jobClassDistributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Bagian Pegawai Baru, Kalkulator, Cuti, dan Disiplin secara logis sama fungsinya, hanya disesuaikan konteks jabatannya -->
+        <div id="page-pegawai-baru" class="page-section space-y-6">
+            <section class="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-slate-200 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <span>🌱</span> Ketentuan Khusus Wali Asuh Baru (Masa Kerja &lt; 1 Tahun)
+                    </h2>
+                    <p class="text-xs text-slate-600 mt-1">
+                        Berdasarkan <strong>PP No. 49 Tahun 2018</strong> dan <strong>Peraturan BKN No. 7 Tahun 2022</strong>, berikut hak bagi pegawai yang baru diangkat.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <div class="lg:col-span-7 overflow-x-auto rounded-xl border border-slate-200">
+                        <table class="w-full text-left text-xs border-collapse min-w-[500px]">
+                            <thead>
+                                <tr class="bg-slate-900 text-white font-bold">
+                                    <th class="p-2.5 border-b border-slate-700">Jenis Hak / Komponen</th>
+                                    <th class="p-2.5 border-b border-slate-700 bg-amber-900/80">Masa Kerja &lt; 1 Tahun</th>
+                                    <th class="p-2.5 border-b border-slate-700 bg-emerald-900/80">Masa Kerja &ge; 1 Tahun</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 text-slate-700">
+                                <tr class="bg-amber-50/50">
+                                    <td class="p-2.5 font-bold">Cuti Tahunan (12 Hari)</td>
+                                    <td class="p-2.5 text-rose-700 font-bold">❌ BELUM BERHAK (Belum 1 thn)</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">✅ BERHAK PENUH (12 Hari)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold">Cuti Melahirkan (3 Bulan)</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">✅ BERHAK (Tanpa syarat 1 thn)</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">✅ BERHAK (s.d. Anak ke-3)</td>
+                                </tr>
+                                <tr class="bg-slate-50">
+                                    <td class="p-2.5 font-bold">Cuti Sakit (&le;14 Hari / &gt;14 Hari)</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">✅ BERHAK (Lampirkan SKD)</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">✅ BERHAK (Sesuai SKD)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold">Gaji Pokok & Tukin</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">✅ 100% Sejak SPMT/TMT</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">✅ 100% Sesuai Kelas/MKG</td>
+                                </tr>
+                                <tr class="bg-slate-50">
+                                    <td class="p-2.5 font-bold">THR & Gaji Ke-13</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">✅ BERHAK <span class="text-[10px] font-normal text-slate-500 block">(Jika SPMT terbit sebelum cut-off)</span></td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">✅ BERHAK PENUH</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-center">
+                        <h3 class="text-xs font-bold text-slate-800 mb-2 text-center">Perbandingan Hak Cuti Pegawai Baru vs Senior</h3>
+                        <div class="chart-container">
+                            <canvas id="tenureRightsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 space-y-3">
+                    <h3 class="text-xs font-bold text-emerald-900 flex items-center justify-between">
+                        <span>✅ Checklist Orientasi Mandiri Wali Asuh (&lt; 1 Tahun)</span>
+                        <span id="checklist-progress" class="px-2 py-0.5 bg-emerald-600 text-white rounded text-[10px]">0 / 4 Selesai</span>
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <label class="flex items-center space-x-2 bg-white p-2.5 rounded border border-emerald-100 cursor-pointer">
+                            <input type="checkbox" onchange="updateChecklist()" class="chk-item rounded text-emerald-600">
+                            <span>Menerima SPMT & Perjanjian Kerja</span>
+                        </label>
+                       <label class="flex items-center space-x-2 bg-white p-2.5 rounded border border-emerald-100 cursor-pointer">
+                            <input type="checkbox" onchange="updateChecklist()" class="chk-item rounded text-emerald-600">
+                            <span>Lapor Kepala Sekolah & Sinergi Program bersama Wali Asrama</span>
+                        </label>
+                        <label class="flex items-center space-x-2 bg-white p-2.5 rounded border border-emerald-100 cursor-pointer">
+                            <input type="checkbox" onchange="updateChecklist()" class="chk-item rounded text-emerald-600">
+                            <span>Penempatan Hunian Asrama UPT SR (Domisili wajib)</span>
+                        </label>
+                        <label class="flex items-center space-x-2 bg-white p-2.5 rounded border border-emerald-100 cursor-pointer">
+                            <input type="checkbox" onchange="updateChecklist()" class="chk-item rounded text-emerald-600">
+                            <span>Memahami SOP Mitigasi Perundungan & Perlindungan Anak</span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-kalkulator" class="page-section space-y-6">
+            <section class="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-slate-200 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <span>🧮</span> Kalkulator Simulasi Take-Home-Pay (THP) Wali Asuh
+                    </h2>
+                    <p class="text-xs text-slate-600 mt-1">
+                        Hitung taksiran penghasilan bersih bulanan berdasarkan Golongan, Masa Kerja, Status Keluarga, serta Potongan Absensi berdasarkan Permensos 1/2025 & 6/2023.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <div class="lg:col-span-5 bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3 text-xs">
+                        <h3 class="font-bold text-slate-800 border-b pb-2">Parameter Simulasi Finansial</h3>
+
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Pendidikan / Golongan PPPK</label>
+                            <select id="calc-golongan" onchange="runCalculator()" class="w-full bg-white p-2 rounded border border-slate-300 text-xs">
+                                <option value="IX" selected>S-1 / D-IV (Gol IX - Kelas Jabatan 7 - Rp 3.203.600)</option>
+                                <option value="VII">D-III (Gol VII - Kelas Jabatan 6 - Rp 2.858.800)</option>
+                                <option value="V">SMA / D-I (Gol V - Kelas Jabatan 5 - Rp 2.511.400)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Masa Kerja Golongan (MKG)</label>
+                            <select id="calc-mkg" onchange="runCalculator()" class="w-full bg-white p-2 rounded border border-slate-300 text-xs">
+                                <option value="0" selected>0 Tahun (Pegawai Baru / SPMT Awal)</option>
+                                <option value="2">2 Tahun (KGB Ke-1)</option>
+                                <option value="6">6 Tahun (KGB Ke-3)</option>
+                                <option value="10">10 Tahun (1 Dekade)</option>
+                                <option value="20">20 Tahun (2 Dekade)</option>
+                                <option value="32">32 Tahun (Masa Kerja Puncak)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Status Marital & Tanggungan</label>
+                            <select id="calc-status" onchange="runCalculator()" class="w-full bg-white p-2 rounded border border-slate-300 text-xs">
+                                <option value="TK0">Lajang / Tanpa Tanggungan (TK/0)</option>
+                                <option value="K0">Menikah Tanpa Anak (K/0)</option>
+                                <option value="K1">Menikah + 1 Anak (K/1)</option>
+                                <option value="K2" selected>Menikah + 2 Anak (K/2)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Potongan Mangkir Absen (Permensos 6/2023)</label>
+                            <select id="calc-mangkir" onchange="runCalculator()" class="w-full bg-white p-2 rounded border border-slate-300 text-xs">
+                                <option value="0" selected>Nihil / Hadir Penuh (0 Hari)</option>
+                                <option value="1">Mangkir 1 Hari (-3% Tukin)</option>
+                                <option value="2">Mangkir 2 Hari (-6% Tukin)</option>
+                                <option value="3">Mangkir 3 Hari (-9% Tukin)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="bg-slate-900 text-white p-4 sm:p-5 rounded-2xl shadow-md space-y-3 text-xs font-mono">
+                            <h3 class="font-bold text-emerald-300 text-sm border-b border-slate-800 pb-2 flex justify-between">
+                                <span>🧾 RINCIAN TAKE-HOME-PAY (THP)</span>
+                                <span class="text-[10px] bg-emerald-900/80 text-emerald-200 px-2 py-0.5 rounded font-sans">Estimasi</span>
+                            </h3>
+
+                            <div class="space-y-1.5 text-[11px]">
+                                <div class="flex justify-between"><span>Gaji Pokok:</span><span id="res-gaji">Rp 3.203.600</span></div>
+                                <div class="flex justify-between text-slate-300"><span>Tunj. Suami/Istri (10%):</span><span id="res-istri">Rp 320.360</span></div>
+                                <div class="flex justify-between text-slate-300"><span>Tunj. Anak (2%/Anak):</span><span id="res-anak">Rp 128.144</span></div>
+                                <div class="flex justify-between text-slate-300"><span>Tunj. Pangan/Beras:</span><span id="res-pangan">Rp 289.680</span></div>
+                                <div class="flex justify-between text-slate-300"><span>Uang Makan (22 HK):</span><span id="res-makan">Rp 814.000</span></div>
+                                <div class="flex justify-between text-emerald-400 font-bold"><span id="tukin-label">Tukin Class 7:</span><span id="res-tukin">Rp 3.915.950</span></div>
+                                <div class="flex justify-between text-rose-400"><span>Potongan Mangkir Absen:</span><span id="res-pot-mangkir">Rp 0</span></div>
+                                <div class="flex justify-between text-slate-400"><span>Est. Iuran BPJS & PPh21 (~2%):</span><span id="res-bpjs">- Rp 153.000</span></div>
+                            </div>
+
+                            <div class="border-t border-slate-700 pt-2 flex justify-between items-center text-amber-300 font-bold text-sm sm:text-base font-sans">
+                                    <span>TAKSIRAN THP BULANAN:</span>
+                                    <span id="res-total" class="text-emerald-400 text-lg">Rp 8.598.692</span>
+                                </div>
+                                <div class="border-t border-slate-700 pt-2 mt-2 flex justify-between items-center text-sky-300 font-bold text-xs sm:text-sm font-sans">
+                                    <span>ESTIMASI THR / GAJI KE-13:</span>
+                                    <span id="res-thr" class="text-sky-400">Rp 0</span>
+                                </div>
+                                <p class="text-[9px] text-slate-500 mt-1 font-sans leading-tight">*THR & Gaji 13 dibayarkan 1x setahun di luar THP bulanan, meliputi Gaji + Tunj. Melekat + 100% Tukin (tanpa uang makan & potongan absen).</p>
+                            </div>
+
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-center">
+                            <h3 class="text-xs font-bold text-slate-800 mb-2 text-center">Komposisi Hak Finansial Bulanan</h3>
+                            <div class="chart-container">
+                                <canvas id="thpPieChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-matriks-cuti" class="page-section space-y-6">
+            <section class="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-slate-200 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <span>📅</span> Matriks Cuti Pegawai (Perba BKN 7/2022)
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    <div class="lg:col-span-7 overflow-x-auto rounded-xl border border-slate-200">
+                        <table class="w-full text-left text-xs border-collapse min-w-[500px]">
+                            <thead>
+                                <tr class="bg-emerald-900 text-white font-bold">
+                                    <th class="p-2.5 border-b border-emerald-800">Jenis Cuti</th>
+                                    <th class="p-2.5 border-b border-emerald-800">Durasi Maksimal</th>
+                                    <th class="p-2.5 border-b border-emerald-800">Masa Kerja Min.</th>
+                                    <th class="p-2.5 border-b border-emerald-800">Ketentuan</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 text-slate-700">
+                                <tr class="bg-emerald-50/40">
+                                    <td class="p-2.5 font-bold text-emerald-950">Cuti Tahunan</td>
+                                    <td class="p-2.5 font-bold">12 Hari Kerja</td>
+                                    <td class="p-2.5 text-rose-700 font-bold">1 Tahun</td>
+                                    <td class="p-2.5">Gaji utuh 100%. Sisa cuti dapat ditangguhkan maksimal 6 hari.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-emerald-950">Cuti Melahirkan</td>
+                                    <td class="p-2.5 font-bold">3 Bulan Penuh</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">Tanpa Syarat</td>
+                                    <td class="p-2.5">Anak ke-1 sampai ke-3 selama menjadi PPPK.</td>
+                                </tr>
+                                <tr class="bg-slate-50">
+                                    <td class="p-2.5 font-bold text-emerald-950">Cuti Sakit Ringan</td>
+                                    <td class="p-2.5 font-bold">1 - 14 Hari</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">Tanpa Syarat</td>
+                                    <td class="p-2.5">Wajib Surat Keterangan Dokter faskes resmi.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-emerald-950">Cuti Alasan Penting</td>
+                                    <td class="p-2.5 font-bold">Maksimal 1 Bulan</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">Tanpa Syarat</td>
+                                    <td class="p-2.5">Berlaku untuk musibah/sakit berat keluarga inti/nikah.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-center">
+                        <h3 class="text-xs font-bold text-slate-800 mb-2 text-center">Durasi Maksimal Hak Cuti PPPK</h3>
+                        <div class="chart-container">
+                            <canvas id="leaveDurationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-operasional" class="page-section space-y-6">
+            <section class="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-slate-200 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <span>🏢</span> Kedudukan, Rasio Kepengasuhan Mikro & Pola Shift
+                    </h2>
+                    <p class="text-xs text-slate-600 mt-1">
+                        Pedoman penyelenggaraan Asrama Sekolah Rakyat mewajibkan Wali Asuh bekerja berdampingan dengan Wali Asrama untuk menjamin lingkungan hidup anak yang protektif.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1.5">
+                        <div class="font-bold text-sky-900 text-sm flex items-center gap-1.5">
+                            <span>🏡</span> Kewajiban Domisili
+                        </div>
+                        <p class="text-slate-600">
+                            Wali Asuh wajib berdomisili di dalam lingkungan Asrama UPT SR sebelum dan selama masa kehadiran peserta didik untuk kesiapsiagaan 24 jam.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1.5">
+                        <div class="font-bold text-emerald-900 text-sm flex items-center gap-1.5">
+                            <span>👥</span> Rasio Pengasuhan (1:10)
+                        </div>
+                        <p class="text-slate-600">
+                            Pendekatan mikro. Wali Asuh idealnya fokus memantau, mendampingi, dan menjadi fasilitator bagi sekitar 10 anak asuh dalam satu satuan kelompok kecil.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1.5">
+                        <div class="font-bold text-amber-900 text-sm flex items-center gap-1.5">
+                            <span>🔄</span> Pola Jadwal/Shift
+                        </div>
+                        <p class="text-slate-600">
+                            Karena asrama hidup 24/7, pola kerja rotasi shift (Pagi, Siang, Malam, Off) ditetapkan berkoordinasi dengan Wali Asrama dan Kepala Sekolah agar tidak ada kekosongan pendampingan.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-disiplin" class="page-section space-y-6">
+            <section class="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-slate-200 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <span>⚠️</span> Sanksi Disiplin & Potongan Tukin Harian
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    <div class="lg:col-span-6 space-y-3 text-xs">
+                        <div class="p-3.5 bg-amber-50 rounded-xl border border-amber-200 space-y-1">
+                            <span class="font-bold text-amber-900 block">1. Potongan Terlambat / Mangkir Harian</span>
+                            <p class="text-slate-700">Terlambat atau mangkir kerja tanpa alasan sah (tidak ada cuti/SKD) dipotong Tukin sebesar <strong>3% per hari mangkir</strong>.</p>
+                        </div>
+
+                        <div class="p-3.5 bg-orange-50 rounded-xl border border-orange-200 space-y-1">
+                            <span class="font-bold text-orange-900 block">2. Sanksi Disiplin Sedang</span>
+                            <p class="text-slate-700">Pelanggaran kategori sedang berpotensi mendapat pemotongan Tukin sebesar <strong>25% selama 6 - 12 bulan</strong>.</p>
+                        </div>
+
+                        <div class="p-3.5 bg-rose-50 rounded-xl border border-rose-200 space-y-1">
+                            <span class="font-bold text-rose-900 block">3. Sanksi Berat (PHK)</span>
+                            <p class="text-slate-700">Mangkir > 10 hari berturut-turut atau terlibat tindakan pidana berakibat Pemberhentian Tidak Dengan Hormat.</p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6 bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-center">
+                        <h3 class="text-xs font-bold text-slate-800 mb-2 text-center">Skala Persentase Sanksi Potongan Tukin</h3>
+                        <div class="chart-container">
+                            <canvas id="deductionScaleChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-rose-900 text-white p-4 sm:p-5 rounded-2xl text-xs space-y-2.5">
+                    <h3 class="text-sm font-bold text-rose-200 flex items-center gap-1.5">
+                        <span>🛑</span> ZERO TOLERANCE: Kawasan Tanpa Kompromi
+                    </h3>
+                    <p class="text-rose-100 leading-relaxed">
+                        Sebagai pembina anak, Wali Asuh harus menjauhkan dan melindungi peserta didik dari tiga hal yang sangat dilarang:
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-2.5 font-semibold text-center my-2">
+                        <div class="bg-rose-800/90 p-2 rounded-lg border border-rose-700">1. Perundungan (Bullying)</div>
+                        <div class="bg-rose-800/90 p-2 rounded-lg border border-rose-700">2. Kekerasan Fisik / Seksual</div>
+                        <div class="bg-rose-800/90 p-2 rounded-lg border border-rose-700">3. Intoleransi & Diskriminasi</div>
+                    </div>
+                    <p class="text-rose-200 font-bold text-center">
+                        ⚠️ Keterlibatan dalam hal di atas akan dikenakan sanksi disiplin terberat hingga ranah hukum pidana.
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <footer class="bg-slate-900 text-slate-400 rounded-2xl p-5 text-xs text-center space-y-2 border border-slate-800">
+            <p class="font-bold text-slate-200">Portal Edukasi Mandiri PPPK Wali Asuh UPT Sekolah Rakyat</p>
+            <p class="max-w-4xl mx-auto text-[11px] text-slate-400">
+                Disusun sebagai referensi mandiri berdasarkan UU 20/2023, Perpres 11/2024, Permensos 1/2025, Permensos 5 & 6/2023, serta SOP Juknis Sekolah Rakyat 2025. Bukan situs pemerintah resmi.
+            </p>
+            <p class="text-slate-500 pt-2 border-t border-slate-800 text-[10px] flex flex-col sm:flex-row justify-center items-center gap-1 sm:gap-2">
+                <span class="font-bold text-emerald-500">© 2026 AW DESIGN</span> 
+                <span class="hidden sm:inline">|</span>
+                <span>Panduan Mandiri PPPK. Disajikan secara transparan dan akurat.</span>
+            </p>
+        </footer>
+
+    </main>
+
+    <script>
+        function wrapLabel(label) {
+            if (typeof label !== 'string') return label;
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    if (currentLine.trim()) lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            if (currentLine.trim()) lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const mandatoryTooltipOption = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) return label.join(' ');
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        function switchTab(tabName) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById('page-' + tabName).classList.add('active');
+            document.getElementById('tab-' + tabName).classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateChecklist() {
+            const items = document.querySelectorAll('.chk-item');
+            let checkedCount = 0;
+            items.forEach(item => {
+                if (item.checked) checkedCount++;
+            });
+            document.getElementById('checklist-progress').innerText = checkedCount + ' / ' + items.length + ' Selesai';
+        }
+
+        const baseSalaries = {
+            'IX': [3203600, 3304400, 3515900, 3740800, 4368300, 5261500],
+            'VII': [2858800, 2948800, 3137500, 3338300, 3898300, 4696800],
+            'V': [2511400, 2590500, 2756200, 2932600, 3424400, 4125600]
+        };
+
+        let thpChartInstance = null;
+
+        function runCalculator() {
+            const gol = document.getElementById('calc-golongan').value;
+            const mkgIdx = parseInt(document.getElementById('calc-mkg').value === "0" ? 0 : 
+                           document.getElementById('calc-mkg').value === "2" ? 1 :
+                           document.getElementById('calc-mkg').value === "6" ? 2 :
+                           document.getElementById('calc-mkg').value === "10" ? 3 :
+                           document.getElementById('calc-mkg').value === "20" ? 4 : 5);
+
+            const status = document.getElementById('calc-status').value;
+            const mangkirHari = parseInt(document.getElementById('calc-mangkir').value);
+
+            const gajiPokok = baseSalaries[gol][mkgIdx];
+            let tunjIstri = 0;
+            let tunjAnak = 0;
+            let tunjPangan = 72420;
+            const uangMakan = 814000;
+            
+            let tukinDasar = 0;
+            let kelasJabatan = 5;
+            if (gol === 'IX') {
+                tukinDasar = 3915950;
+                kelasJabatan = 7;
+            } else if (gol === 'VII') {
+                tukinDasar = 3510400;
+                kelasJabatan = 6;
+            } else if (gol === 'V') {
+                tukinDasar = 3134250;
+                kelasJabatan = 5;
+            }
+
+            if (status === 'K0') {
+                tunjIstri = gajiPokok * 0.10;
+                tunjPangan = 72420 * 2;
+            } else if (status === 'K1') {
+                tunjIstri = gajiPokok * 0.10;
+                tunjAnak = gajiPokok * 0.02;
+                tunjPangan = 72420 * 3;
+            } else if (status === 'K2') {
+                tunjIstri = gajiPokok * 0.10;
+                tunjAnak = gajiPokok * 0.04;
+                tunjPangan = 72420 * 4;
+            }
+
+            const potMangkir = (tukinDasar * (mangkirHari * 0.03));
+            const tukinNett = Math.max(0, tukinDasar - potMangkir);
+            const bpjsPot = (gajiPokok + tunjIstri + tunjAnak) * 0.02;
+
+            const totalTHP = (gajiPokok + tunjIstri + tunjAnak + tunjPangan + uangMakan + tukinNett) - bpjsPot;
+
+            document.getElementById('res-gaji').innerText = 'Rp ' + gajiPokok.toLocaleString('id-ID');
+            document.getElementById('res-istri').innerText = 'Rp ' + Math.round(tunjIstri).toLocaleString('id-ID');
+            document.getElementById('res-anak').innerText = 'Rp ' + Math.round(tunjAnak).toLocaleString('id-ID');
+            document.getElementById('res-pangan').innerText = 'Rp ' + Math.round(tunjPangan).toLocaleString('id-ID');
+            document.getElementById('res-makan').innerText = 'Rp ' + uangMakan.toLocaleString('id-ID');
+            document.getElementById('tukin-label').innerText = 'Tukin Class ' + kelasJabatan + ':';
+            document.getElementById('res-tukin').innerText = 'Rp ' + tukinDasar.toLocaleString('id-ID');
+            document.getElementById('res-pot-mangkir').innerText = '- Rp ' + Math.round(potMangkir).toLocaleString('id-ID');
+          document.getElementById('res-bpjs').innerText = '- Rp ' + Math.round(bpjsPot).toLocaleString('id-ID');
+            document.getElementById('res-total').innerText = 'Rp ' + Math.round(totalTHP).toLocaleString('id-ID');
+            
+            const thrGaji13 = gajiPokok + tunjIstri + tunjAnak + tunjPangan + tukinDasar;
+            document.getElementById('res-thr').innerText = 'Rp ' + Math.round(thrGaji13).toLocaleString('id-ID');
+
+            if (thpChartInstance) {
+                thpChartInstance.data.datasets[0].data = [
+                    gajiPokok,
+                    Math.round(tunjIstri + tunjAnak + tunjPangan),
+                    uangMakan,
+                    Math.round(tukinNett)
+                ];
+                thpChartInstance.update();
+            }
+        }
+
+       const topics = [
+            { key: 'atasan', title: 'Pelaporan Wali Asuh', page: 'struktur-org', info: 'Wali Asuh melaporkan kinerja dan perkembangan anak kepada Wali Asrama, dikoordinir Kepala Sekolah.' },
+            { key: 'mitra', title: 'Kemitraan Wali Asuh & Wali Asrama', page: 'struktur-org', info: 'Wali Asuh berkedudukan sejajar dengan Wali Asrama (tidak hierarkis).' },
+            { key: 'tugas', title: 'SOP & Kewajiban Wali Asuh', page: 'tugas-kewajiban', info: 'Pendampingan anak, refleksi keseharian, konseling, dan perlindungan dari bullying.' },
+            { key: 'kelas jabatan', title: 'Kelas Jabatan Kemensos', page: 'kelas-jabatan', info: 'Penata Layanan Operasional Kelas 7 dengan Tukin Rp 3,9 Juta.' },
+            { key: 'gaji', title: 'Simulasi Gaji & Tukin', page: 'kalkulator', info: 'Perhitungan estimasi Gaji Pokok (Perpres 11/2024) dan Tukin untuk jabatan Wali Asuh.' },
+            { key: 'cuti', title: 'Hak Cuti PPPK', page: 'matriks-cuti', info: 'Info cuti tahunan, sakit, dan CAP.' },
+            { key: 'shift', title: 'Jadwal & Shift Harian', page: 'operasional', info: 'Operasional 24 jam dengan rotasi jaga untuk rasio anak 1:10.' }
+        ];
+
+        function handleSearch() {
+            const query = document.getElementById('global-search').value.toLowerCase().trim();
+            const resultsBox = document.getElementById('search-results-box');
+            const resultsList = document.getElementById('search-results-list');
+
+            if (query.length < 2) {
+                resultsBox.classList.add('hidden');
+                return;
+            }
+
+            const matched = topics.filter(t => t.key.includes(query) || t.title.toLowerCase().includes(query) || t.info.toLowerCase().includes(query));
+
+            if (matched.length > 0) {
+                resultsList.innerHTML = matched.map(m => `
+                    <div class="p-2 bg-white rounded border border-amber-200 cursor-pointer hover:bg-amber-100/50" onclick="switchTab('${m.page}'); clearSearch();">
+                        <span class="font-bold text-emerald-900">${m.title}</span>
+                        <p class="text-slate-600 text-[11px]">${m.info}</p>
+                    </div>
+                `).join('');
+                resultsBox.classList.remove('hidden');
+            } else {
+                resultsList.innerHTML = '<p class="text-slate-500 italic">Topik tidak ditemukan. Coba kata "kemitraan", "tugas", "gaji", atau "shift".</p>';
+                resultsBox.classList.remove('hidden');
+            }
+        }
+
+        function clearSearch() {
+            document.getElementById('global-search').value = '';
+            document.getElementById('search-results-box').classList.add('hidden');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const ctxTask = document.getElementById('taskAllocationChart').getContext('2d');
+            new Chart(ctxTask, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pendampingan & Perlindungan', 'Sinergi & Keterlaksanaan Program', 'Refleksi & Konseling', 'Pencegahan Perundungan', 'Laporan Kinerja/Administrasi'],
+                    datasets: [{
+                        data: [35, 20, 20, 15, 10],
+                        backgroundColor: ['#059669', '#0284c7', '#d97706', '#e11d48', '#64748b']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { padding: 20, boxWidth: 15, font: { size: 11 }}},
+                        tooltip: mandatoryTooltipOption.plugins.tooltip
+                    }
+                }
+            });
+
+            const ctxJobClass = document.getElementById('jobClassDistributionChart').getContext('2d');
+            new Chart(ctxJobClass, {
+                type: 'bar',
+                data: {
+                   labels: ['Wali Asuh / Wali Asrama', 'Guru Pertama', 'Guru Muda', 'Kepala Sekolah'].map(wrapLabel),
+                    datasets: [{
+                        label: 'Kelas Jabatan',
+                        data: [7, 8, 10, 13],
+                        backgroundColor: ['#059669', '#0284c7', '#0d9488', '#8b5cf6'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, max: 15, ticks: { callback: v => 'Kelas ' + v } } },
+                    plugins: { legend: { display: false }, tooltip: mandatoryTooltipOption.plugins.tooltip }
+                }
+            });
+
+          const ctxTenure = document.getElementById('tenureRightsChart').getContext('2d');
+            new Chart(ctxTenure, {
+                type: 'bar',
+                data: {
+                    labels: ['Cuti Tahunan', 'Cuti Melahirkan', 'Cuti Sakit', 'Gaji & Tukin', 'THR & Gaji 13'].map(wrapLabel),
+                    datasets: [
+                        { label: 'Pegawai Baru (< 1 Thn)', data: [0, 100, 100, 100, 100], backgroundColor: '#d97706' },
+                        { label: 'Pegawai Senior (≥ 1 Thn)', data: [100, 100, 100, 100, 100], backgroundColor: '#059669' }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, max: 120, ticks: { callback: v => v === 100 ? 'Berhak' : (v === 0 ? 'Belum' : '') } } },
+                    plugins: { legend: { position: 'bottom' }, tooltip: mandatoryTooltipOption.plugins.tooltip }
+                }
+            });
+
+            const ctxPie = document.getElementById('thpPieChart').getContext('2d');
+            thpChartInstance = new Chart(ctxPie, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Gaji Pokok', 'Tunj. Keluarga & Pangan', 'Uang Makan', 'Tukin Bersih'],
+                    datasets: [{
+                        data: [3203600, 738184, 814000, 3915950],
+                        backgroundColor: ['#059669', '#0d9488', '#f59e0b', '#0284c7']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom', labels: { padding: 20, boxWidth: 15, font: { size: 11 }}}, tooltip: mandatoryTooltipOption.plugins.tooltip }
+                }
+            });
+
+            const ctxLeave = document.getElementById('leaveDurationChart').getContext('2d');
+            new Chart(ctxLeave, {
+                type: 'bar',
+                data: {
+                    labels: ['Cuti Tahunan (Hari)', 'Cuti Melahirkan (Bulan)', 'Cuti Sakit (Hari)'].map(wrapLabel),
+                    datasets: [{
+                        label: 'Durasi Maksimal',
+                        data: [12, 3, 14],
+                        backgroundColor: ['#059669', '#d97706', '#0284c7'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: mandatoryTooltipOption.plugins.tooltip }
+                }
+            });
+
+            const ctxDeduct = document.getElementById('deductionScaleChart').getContext('2d');
+            new Chart(ctxDeduct, {
+                type: 'bar',
+                data: {
+                    labels: ['Mangkir 1 Hari', 'Mangkir 3 Hari', 'Sanksi Sedang (6 Bln)'].map(wrapLabel),
+                    datasets: [{
+                        label: 'Potongan Tukin (%)',
+                        data: [3, 9, 25],
+                        backgroundColor: ['#f59e0b', '#ea580c', '#dc2626'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, max: 30, ticks: { callback: v => v + '%' } } },
+                    plugins: { legend: { display: false }, tooltip: mandatoryTooltipOption.plugins.tooltip }
+                }
+            });
+
+            runCalculator();
+        });
+    </script>
+</body>
+</html>
